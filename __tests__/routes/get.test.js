@@ -22,7 +22,7 @@ describe('testing create route handler', () => {
     const next = jest.fn();
 
     await handleGet(req, res, next);
-    expect(req.model.findByPk).toHaveBeenCalledWith(req.params.id);
+    expect(req.model.findByPk).toHaveBeenCalledWith(req.params.id, {});
     expect(next).not.toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
