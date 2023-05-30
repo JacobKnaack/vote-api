@@ -1,6 +1,6 @@
 'use strict';
 
-const { handleInvitation } = require('../../lib/middlewares');
+const { handleInvite } = require('../../lib/middlewares');
 const { sequelize, poll } = require('../../lib/models');
 process.env.INVITATION_SECRET = 'TEST_STRING';
 
@@ -31,7 +31,7 @@ describe('Testing the invitation handler route', () => {
     };
     let next = jest.fn();
 
-    await handleInvitation(req, res, next);
+    await handleInvite(req, res, next);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
   });
@@ -46,7 +46,7 @@ describe('Testing the invitation handler route', () => {
     };
     let next = jest.fn();
 
-    await handleInvitation(req, res, next);
+    await handleInvite(req, res, next);
     expect(res.json).not.toHaveBeenCalled();
     expect(next).toHaveBeenCalledWith({ code: 400, message: 'Invalid Request, missing parameters' });
   });

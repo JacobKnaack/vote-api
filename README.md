@@ -4,7 +4,19 @@ RESTful web service for publishing expiring Polls, Candidates, and Vote records.
 
 ## Installation
 
+`git clone`
+
+`npm install`
+
+See `env.sample` and add values as necessary.
+
 ## Usage
+
+`npm test` - runs all integration and unit tests in a test environment.
+
+`npm run dev` - runs the app in developer mode.
+
+`npm start` - runs the app in production mode.
 
 ## Features
 
