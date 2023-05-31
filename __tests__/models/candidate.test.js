@@ -1,6 +1,8 @@
 'use strict';
 
-const { sequelize, candidate, poll, vote } = require('../../lib/models');
+const { sequelize, tables } = require('../../lib/models');
+let { candidate, poll, vote } = tables;
+
 
 beforeAll(async () => {
   await sequelize.sync();

@@ -1,9 +1,10 @@
 'use strict';
 
 const { handleInvite } = require('../../lib/middlewares');
-const { sequelize, poll } = require('../../lib/models');
+const { sequelize, tables } = require('../../lib/models');
 process.env.INVITATION_SECRET = 'TEST_STRING';
 
+let { poll } = tables;
 let testPoll = null;
 
 beforeAll(async () => {

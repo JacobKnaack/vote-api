@@ -1,10 +1,11 @@
 'use strict';
 
-const { sequelize, poll, candidate, vote } = require('../lib/models');
+const { sequelize, tables } = require('../lib/models');
 const app = require('../lib/app');
 const supertest = require('supertest');
 const request = supertest(app);
 
+const { poll, candidate } = tables;
 let testPoll = null;
 let testCandidate1 = null;
 let testCandidate2 = null;

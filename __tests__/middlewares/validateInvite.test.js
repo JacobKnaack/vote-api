@@ -1,8 +1,9 @@
 'use strict';
 
-const { sequelize, poll } = require('../../lib/models');
+const { sequelize, tables } = require('../../lib/models');
 const { validateInvite } = require('../../lib/middlewares');
 
+let { poll } = tables;
 let testPoll = null;
 
 beforeAll(async () => {
@@ -18,7 +19,9 @@ describe('Validate Invite Middleware', () => {
     let req = {
       headers: {
         authorization: `Bearer ${testPoll.generateInvite()}`
-      }
+      },
+      method: 'POST',
+      path: '/vote',
     }
     let res = {
       status: jest.fn(() => res),
@@ -34,7 +37,9 @@ describe('Validate Invite Middleware', () => {
 
   test('Should call next with a 401 error if no header is present', () => {
     let req = {
-      headers: {}
+      headers: {},
+      method: 'POST',
+      path: '/vote'
     }
     let res = {}
     let next = jest.fn()
