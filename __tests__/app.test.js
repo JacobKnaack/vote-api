@@ -7,6 +7,7 @@ const request = supertest(app);
 
 const { poll, candidate } = tables;
 let testPoll = null;
+let testInvitation = null;
 let testCandidate1 = null;
 let testCandidate2 = null;
 
@@ -14,11 +15,11 @@ beforeAll(async () => {
   await sequelize.sync();
   // create a test Poll and some test Candidates
   testPoll = await poll.create({ name: 'testPoll' });
+  testInvitation = await testPoll.generateInvite();
   testCandidate1 = await candidate.create({ name: 'testCandidate1', pollId: testPoll.id });
   testCandidate2 = await candidate.create({ name: 'testCandidate2', pollId: testPoll.id });
-  
   // create users for authentication
-})
+});
 afterAll(async () => {
   await sequelize.drop();
 });
@@ -55,12 +56,23 @@ describe('Testing the app server routes', () => {
   });
 
   test('Should create a Vote on POST /vote', async () => {
-    let response = await request.post('/api/v1/vote').send({ candidateId: testCandidate1.id });
+    let response = await request.post('/api/v1/vote')
+      .set({ Authorization: `Bearer ${testInvitation}` })
+      .send({ candidateId: testCandidate1.id });
 
     expect(response.status).toBe(201);
     expect(response.body.id).toBeTruthy();
     expect(response.body.candidateId).toEqual(testCandidate1.id);
   });
+
+  test('Should respond with 401 on POST /vote without a valid invite', async () => {
+    let response = await request.post('/api/v1/vote')
+      .set({ Authorization: `Bearer BadToken` })
+      .send({ candidateId: testCandidate1.id });
+
+    expect(response.status).toEqual(401);
+    expect(response.body.message).toEqual('Router Error: unable to validate invitation');
+  })
 
   test('Should be able to get a candidate and all votes on GET /candidates', async () => {
     let response = await request.get('/api/v1/candidate');

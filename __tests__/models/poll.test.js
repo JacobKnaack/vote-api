@@ -33,5 +33,5 @@ describe('Testing the Polls model', () => {
     expect(search.name).toEqual('test2');
     expect(search.Candidates).toBeTruthy();
     expect(search.Candidates[0].id).toEqual(association.id);
-  })
+  });
 });

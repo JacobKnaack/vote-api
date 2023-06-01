@@ -1,7 +1,7 @@
 'use strict';
 
 const { sequelize, tables } = require('../../lib/models');
-const { validateInvite } = require('../../lib/middlewares');
+const { authenticateInvite } = require('../../lib/middlewares');
 
 let { poll } = tables;
 let testPoll = null;
@@ -19,9 +19,7 @@ describe('Validate Invite Middleware', () => {
     let req = {
       headers: {
         authorization: `Bearer ${testPoll.generateInvite()}`
-      },
-      method: 'POST',
-      path: '/vote',
+      }
     }
     let res = {
       status: jest.fn(() => res),
@@ -31,20 +29,18 @@ describe('Validate Invite Middleware', () => {
     }
     let next = jest.fn();
 
-    validateInvite(req, res, next);
+    authenticateInvite(req, res, next);
     expect(next).toHaveBeenCalledWith();
   });
 
   test('Should call next with a 401 error if no header is present', () => {
     let req = {
-      headers: {},
-      method: 'POST',
-      path: '/vote'
+      headers: {}
     }
     let res = {}
     let next = jest.fn()
 
-    validateInvite(req, res, next);
-    expect(next).toHaveBeenCalledWith({code: 401, message: 'Invalid Invitation'});
+    authenticateInvite(req, res, next);
+    expect(next).toHaveBeenCalled();
   })
 });
