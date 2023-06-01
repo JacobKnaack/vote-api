@@ -1,6 +1,7 @@
 'use strict';
 
-const { sequelize, poll, candidate } = require('../../lib/models');
+const { sequelize, tables } = require('../../lib/models');
+let { poll, candidate } = tables;
 
 beforeAll(async () => {
   try {
@@ -32,5 +33,5 @@ describe('Testing the Polls model', () => {
     expect(search.name).toEqual('test2');
     expect(search.Candidates).toBeTruthy();
     expect(search.Candidates[0].id).toEqual(association.id);
-  })
+  });
 });

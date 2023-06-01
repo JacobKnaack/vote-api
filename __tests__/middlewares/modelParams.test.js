@@ -1,6 +1,6 @@
 'use strict';
 
-const { modelParams } = require('../../lib/middlewares/');
+const { modelParams } = require('../../lib/middlewares');
 
 describe('Testing the model param middleware', () => {
   test('should add a function to the request object', () => {
