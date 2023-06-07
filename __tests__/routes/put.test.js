@@ -1,6 +1,6 @@
 'use strict';
 
-const handlePut = require('../../lib/routes/handlePut');
+const { handlePut } = require('../../lib/routes/handlers');
 
 describe('PUT route handler', () => {
   test('Should return a new record', async () => {

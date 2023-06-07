@@ -1,6 +1,6 @@
 'use strict';
 
-const handlePatch = require('../../lib/routes/handlePatch');
+const{ handlePatch } = require('../../lib/routes/handlers');
 const { v4: uuid } = require('uuid');
 
 describe('testing the PATCH handler', () => {

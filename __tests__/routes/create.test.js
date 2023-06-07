@@ -1,6 +1,6 @@
 'use strict';
 
-const handlePost = require('../../lib/routes/handlePost');
+const { handlePost } = require('../../lib/routes/handlers');
 
 describe('testing create route handler', () => {
   test('Calls the create model method', async () => {

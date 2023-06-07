@@ -1,6 +1,6 @@
 'use strict';
 
-const handleDelete = require('../../lib/routes/handleDelete');
+const { handleDelete } = require('../../lib/routes/handlers');
 
 describe('DELETE route handler', () => {
   test('Should return a status 200 and no body', async () => {

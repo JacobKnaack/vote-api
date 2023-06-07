@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose --coverage",
+    "test": "NODE_ENV=test jest --verbose --coverage --testPathIgnorePatterns=/auth/",
+    "test:auth": "NODE_ENV=test jest --verbose --testPathPattern=/auth/",
     "test:watch": "NODE_ENV=test jest --verbose --watchAll",
     "dev": "NODE_ENV=development nodemon index.js",
     "start": "NODE_ENV=production node index.js"
@@ -18,7 +19,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-openid-connect": "^2.16.0",
     "jsonwebtoken": "^9.0.0",
+    "jwks-rsa": "^3.0.1",
     "pg": "^8.11.0",
     "sequelize": "^6.31.1",
     "sqlite3": "^5.1.6"

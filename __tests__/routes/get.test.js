@@ -1,6 +1,6 @@
 'use strict';
 
-const handleGet = require('../../lib/routes/handleGet');
+const { handleGet } = require('../../lib/routes/handlers');
 const { v4: uuid } = require('uuid');
 
 describe('testing create route handler', () => {
